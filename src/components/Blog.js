@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import blogService from '../services/blogs'
 
-const Blog = ({blog}) => {
+const Blog = ({blog, blogsState, setBlogsState}) => {
   const [visible, setVisible] = useState(false)
   const [blogLikes, setBlogLikes] = useState(blog.likes)
 
@@ -16,6 +16,12 @@ const Blog = ({blog}) => {
     try {
       const updatedBlog = await blogService.updateBlog(blog.id, blogAfterLikePress)
       setBlogLikes(updatedBlog.likes)
+      const newBlogsState = blogsState.map(({likes, ...b}) => ({
+        ...b,
+        likes: b.id === updatedBlog.id ? updatedBlog.likes : likes
+      })
+      )
+      setBlogsState(newBlogsState)
     } catch (exception) {
       console.log('Could not update blog')
     }
@@ -24,6 +30,8 @@ const Blog = ({blog}) => {
   const deleteBlog = async () => {
     try {
       await blogService.deleteBlog(blog.id)
+      const newBlogsState = blogsState.filter((b) => b.id !== blog.id)
+      setBlogsState(newBlogsState)
     } catch (exception) {
       console.log('Could not delete blog')
     }
