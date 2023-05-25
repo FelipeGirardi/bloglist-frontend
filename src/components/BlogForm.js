@@ -6,6 +6,7 @@ const BlogForm = ({ title, author, url, handleTitleChange, handleAuthorChange, h
         type="text"
         value={title}
         name="Title"
+        placeholder='Blog title'
         onChange={handleTitleChange}
       />
     </div>
@@ -15,6 +16,7 @@ const BlogForm = ({ title, author, url, handleTitleChange, handleAuthorChange, h
         type="text"
         value={author}
         name="Author"
+        placeholder='Blog author'
         onChange={handleAuthorChange}
       />
     </div>
@@ -24,6 +26,7 @@ const BlogForm = ({ title, author, url, handleTitleChange, handleAuthorChange, h
         type="text"
         value={url}
         name="Url"
+        placeholder='Blog url'
         onChange={handleUrlChange}
       />
     </div>

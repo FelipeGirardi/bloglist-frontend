@@ -1,12 +1,12 @@
 const Notification = ({ message, notifType }) => {
   if (message === null) {
-      return null
+    return null
   }
 
   return (
-      <div className={notifType}>
+    <div className={notifType}>
       {message}
-      </div>
+    </div>
   )
 }
 

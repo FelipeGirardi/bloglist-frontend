@@ -50,7 +50,7 @@ const App = () => {
         'loggedUser', JSON.stringify(user)
       )
       blogService.setToken(user.token)
-      setMessage(`User logged in`)
+      setMessage('User logged in')
       setNotificationType('confirm')
       setTimeout(() => {
         setMessage(null)
@@ -101,6 +101,29 @@ const App = () => {
     }
   }
 
+  const handleLike = async (blog) => {
+    try {
+      const updatedBlog = { ...blog, likes: blog.likes + 1 }
+      await blogService.updateBlog(blog.id, updatedBlog)
+      const updatedBlogs = blogs.map((currBlog) => (currBlog.id === blog.id ? updatedBlog : currBlog))
+      setBlogs(updatedBlogs)
+    } catch (exception) {
+      console.log('Could not update blog')
+    }
+  }
+
+  const deleteBlog = async (blog) => {
+    try {
+      if (window.confirm(`Delete ${blog.title}?`)) {
+        await blogService.deleteBlog(blog.id)
+        const updatedBlogs = blogs.filter((b) => b.id !== blog.id)
+        setBlogs(updatedBlogs)
+      }
+    } catch (exception) {
+      console.log('Could not delete blog')
+    }
+  }
+
   // -- components
 
   const blogsList = () => (
@@ -109,8 +132,8 @@ const App = () => {
       {blogs
         .sort((a, b) => b.likes - a.likes)
         .map(blog =>
-        <Blog key={blog.id} blog={blog} blogsState={blogs} setBlogsState={setBlogs} />
-      )}
+          <Blog key={blog.id} blog={blog} handleLike={handleLike} deleteBlog={deleteBlog} />
+        )}
     </div>
   )
 
@@ -129,12 +152,12 @@ const App = () => {
           <p>{user.name} logged in</p>
           <Togglable buttonLabel="new blog">
             <BlogForm title={title}
-            author={author}
-            url={url}
-            handleTitleChange={({ target }) => setTitle(target.value)}
-            handleAuthorChange={({ target }) => setAuthor(target.value)}
-            handleUrlChange={({ target }) => setUrl(target.value)}
-            handleAddBlog={handleAddBlog} />
+              author={author}
+              url={url}
+              handleTitleChange={({ target }) => setTitle(target.value)}
+              handleAuthorChange={({ target }) => setAuthor(target.value)}
+              handleUrlChange={({ target }) => setUrl(target.value)}
+              handleAddBlog={handleAddBlog} />
           </Togglable>
           {blogsList()}
           <button onClick={() => handleLogout()}>logout</button>
