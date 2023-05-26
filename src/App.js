@@ -160,7 +160,7 @@ const App = () => {
               handleAddBlog={handleAddBlog} />
           </Togglable>
           {blogsList()}
-          <button onClick={() => handleLogout()}>logout</button>
+          <button id="logoutButton" onClick={() => handleLogout()}>logout</button>
         </div>
       }
     </div>

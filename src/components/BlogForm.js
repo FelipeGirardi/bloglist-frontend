@@ -6,7 +6,8 @@ const BlogForm = ({ title, author, url, handleTitleChange, handleAuthorChange, h
         type="text"
         value={title}
         name="Title"
-        placeholder='Blog title'
+        placeholder="Blog title"
+        id="blogTitle"
         onChange={handleTitleChange}
       />
     </div>
@@ -16,7 +17,8 @@ const BlogForm = ({ title, author, url, handleTitleChange, handleAuthorChange, h
         type="text"
         value={author}
         name="Author"
-        placeholder='Blog author'
+        placeholder="Blog author"
+        id="blogAuthor"
         onChange={handleAuthorChange}
       />
     </div>
@@ -26,11 +28,12 @@ const BlogForm = ({ title, author, url, handleTitleChange, handleAuthorChange, h
         type="text"
         value={url}
         name="Url"
-        placeholder='Blog url'
+        placeholder="Blog url"
+        id="blogUrl"
         onChange={handleUrlChange}
       />
     </div>
-    <button type="submit">create</button>
+    <button id="create-button" type="submit">create</button>
   </form>
 )
 }

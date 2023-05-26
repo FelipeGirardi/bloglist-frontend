@@ -21,17 +21,17 @@ const Blog = ({ blog, handleLike, deleteBlog }) => {
   return (
     <div style={blogStyle} className='blog'>
       <div style={{ display: 'flex' }} className='short'> {blog.title} - {blog.author}
-        <div style={showWhenVisible}> <button onClick={toggleVisibility}>hide</button>
+        <div style={showWhenVisible}> <button onClick={toggleVisibility} id="lessInfo">hide</button>
         </div>
         <div style={hideWhenVisible}>
-          <button onClick={toggleVisibility}>view</button>
+          <button onClick={toggleVisibility} id="moreInfo">view</button>
         </div>
       </div>
       <div style={showWhenVisible} className='long'>
         <div className='url'>{blog.url}</div>
-        <div className='likes'>likes: {blog.likes} <button onClick={() => handleLike(blog)} id='likeButton'>like</button></div>
+        <div id="likes" className='likes'>likes: {blog.likes} <button onClick={() => handleLike(blog)} id='likeButton'>like</button></div>
         <div className='username'>{blog.user.name}</div>
-        <div><button style={{ backgroundColor: 'cyan' }} onClick={() => deleteBlog(blog)}>remove</button></div>
+        <div><button id='deleteButton' style={{ backgroundColor: 'cyan' }} onClick={() => deleteBlog(blog)}>remove</button></div>
       </div>
     </div>
   )}
